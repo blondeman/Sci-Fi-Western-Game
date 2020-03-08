@@ -1,0 +1,54 @@
+//GAME MECHANICS//
+
+#tile based game set on different planets
+-the worlds will have villages, abandonded locations, all based on the type of world(desert, swamp, fungus, etc..)
+-villages will have friendly creatures inside that will give you quests to fulfill in the world
+
+#world will be randomly generated, with premade points of interests scattered around the world
+-create an editor tool to create points of interest and save it to a scriptable object
+-points of interest will be made of tiles that will fit into the tile array of the world
+-these objects will be loaded into the world when the world is generated
+
+#world will loop around at the edge
+-world will extend slightly past the limit, where nothing will be generated in order to ensure a seamless transition
+-the player will be moved to the opposite side when they pass the invisible border
+
+#traveling to other planets
+-after building first ship player can travel to new planets
+
+#planets will be randomly generated from premade list
+-planets will have variations in their looks, but will be selected from a list of world type, as mentioned above(desert, swamp, fungus, etc..)
+
+//PLAYER//
+
+#player can be customized
+-at start of the game you can customize the look of your character
+
+#inventory
+-can hold items, but needs a bag of sorts to store more items
+
+//HABITANTS//
+
+#inventory
+-same inventory limitations as the player
+
+#interactions
+-habitants of a village will have quests
+-they can be killed, but will defend themselves
+
+#personalities
+-some will have harsher personalities, and others milder
+-habitants with mild personalities may not defend themselves and rely on others to do so
+-those with harsh personalities will defend themselves, and possibly instigate a brawl
+-if a habitant starts a brawl with the player, others will not help defend him
+
+//PLANETS//
+
+#desert
+-desert habitants will be snake people
+
+#swamp
+-swamp habitants will be frog people
+
+#fungus
+-fungus habitants will be mushroom people
