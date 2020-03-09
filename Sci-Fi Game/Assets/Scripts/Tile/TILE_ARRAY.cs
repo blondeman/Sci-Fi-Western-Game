@@ -20,11 +20,3 @@ public class TILE_ARRAY
 		int_array[x, y] = (int)tile_type;
 	}
 }
-
-public enum TILE_TYPE
-{
-	floor,
-	roofed,
-	solid,
-	transparent
-}
