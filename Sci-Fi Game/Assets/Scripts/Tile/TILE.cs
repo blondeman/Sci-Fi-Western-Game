@@ -20,3 +20,11 @@ public static class TILE
 		//calculate real world position
 	}
 }
+
+public enum TILE_TYPE
+{
+	floor,
+	roofed,
+	solid,
+	transparent
+}
