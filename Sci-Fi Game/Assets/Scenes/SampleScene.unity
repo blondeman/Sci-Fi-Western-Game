@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a7a48d3f00f7c34589170faa04199aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile_size: 0.2
+  tile_size: 1
   world_dimensions: {x: 10, y: 10}
   boundary_width: 5
   tile_data:
