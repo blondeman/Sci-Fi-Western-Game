@@ -10,13 +10,21 @@ public class TILE_ARRAY
 
 	public void Initialize_TILE_ARRAY(int width, int height)
 	{
-		this.width = width;
-		this.height = height;
-		int_array = new int[width, height];
+		this.width =	width;
+		this.height =	height;
+		int_array =		new int[width, height];
 	}
 
 	public void Set_Tile_TILE_ARRAY(int x, int y, TILE_TYPE tile_type)
 	{
 		int_array[x, y] = (int)tile_type;
 	}
+}
+
+public enum TILE_TYPE
+{
+	floor,
+	roofed,
+	solid,
+	transparent
 }

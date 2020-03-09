@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class TILE_RENDERER : MonoBehaviour
 {
-	public float		tile_size;
-	public Vector2Int	world_dimensions;
-	public int			boundary_width;
-	private TILE_ARRAY	tile_array;
-	public TILE_DATA[]	tile_data;
-	public TILE_OBJECT	tile_prefab;
+	public static TILE_RENDERER instance;
+	public float				tile_size;
+	public Vector2Int			world_dimensions;
+	public int					boundary_width;
+	private TILE_ARRAY			tile_array;
+	public TILE_DATA[]			tile_data;
+	public TILE_OBJECT			tile_prefab;
 
 	private void Start()
 	{
+		if (instance != null)
+			instance = this;
 		Render_TILE_RENDERER();
 	}
 
