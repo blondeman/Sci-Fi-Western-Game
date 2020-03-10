@@ -17,5 +17,5 @@ public enum ITEM_TYPE
 	quest,
 	currency,
 	wearable,
-
+	placeable
 }

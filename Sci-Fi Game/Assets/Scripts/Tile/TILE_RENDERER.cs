@@ -14,7 +14,7 @@ public class TILE_RENDERER : MonoBehaviour
 
 	private void Start()
 	{
-		if (instance != null)
+		if (instance == null)
 			instance = this;
 		Render_TILE_RENDERER();
 	}

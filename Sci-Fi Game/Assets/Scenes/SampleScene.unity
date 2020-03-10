@@ -213,8 +213,9 @@ GameObject:
   m_Component:
   - component: {fileID: 930324450}
   - component: {fileID: 930324449}
+  - component: {fileID: 930324451}
   m_Layer: 0
-  m_Name: Tile Manager
+  m_Name: Global Scripts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,6 +254,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &930324451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930324448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ac0d5c4a8a21641b7f407ced141fa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: []
 --- !u!1 &1014317763
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,10 +276,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1014317768}
-  - component: {fileID: 1014317767}
-  - component: {fileID: 1014317766}
   - component: {fileID: 1014317765}
   - component: {fileID: 1014317764}
+  - component: {fileID: 1014317767}
+  - component: {fileID: 1014317766}
   m_Layer: 0
   m_Name: Default_character
   m_TagString: Untagged
@@ -360,6 +374,16 @@ MonoBehaviour:
     speed: 1
   health:
     max_health: 10
+  inventory:
+    item_array:
+    - id: 1
+      count: 3
+      pos_x: 0
+      pos_y: 0
+    - id: 0
+      count: 10
+      pos_x: 0
+      pos_y: 0
 --- !u!114 &1014317767
 MonoBehaviour:
   m_ObjectHideFlags: 0
