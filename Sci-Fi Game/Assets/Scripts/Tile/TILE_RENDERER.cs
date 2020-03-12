@@ -4,19 +4,27 @@ using UnityEngine;
 
 public class TILE_RENDERER : MonoBehaviour
 {
-	public static TILE_RENDERER instance;
-	public float				tile_size;
-	public Vector2Int			world_dimensions;
-	public int					boundary_width;
-	private TILE_ARRAY			tile_array;
-	public TILE_DATA[]			tile_data;
-	public TILE_OBJECT			tile_prefab;
+	public static TILE_RENDERER		instance;
+	public float					tile_size;
+	public Vector2Int				world_dimensions;
+	public int						boundary_width;
+	private TILE_ARRAY				tile_array;
+	public TILE_DATA[]				tile_data;
+	public TILE_OBJECT				tile_prefab;
+	[HideInInspector] public float	bounds_neg_x, bounds_neg_y, bounds_pos_x, bounds_pos_y;
 
 	private void Start()
 	{
 		if (instance == null)
 			instance = this;
 		Render_TILE_RENDERER();
+
+		float boundary_width_size = boundary_width * tile_size;
+
+		bounds_neg_x = boundary_width_size/2 - tile_size/2;
+		bounds_neg_y = boundary_width_size/ 2 -+ tile_size / 2;
+		bounds_pos_x = (boundary_width + world_dimensions.x) * tile_size + boundary_width_size / 2 - tile_size / 2;
+		bounds_pos_y = (boundary_width + world_dimensions.y) * tile_size + boundary_width_size / 2 - tile_size / 2;
 	}
 
 	public void Render_TILE_RENDERER()
@@ -37,5 +45,33 @@ public class TILE_RENDERER : MonoBehaviour
 	{
 		TILE_OBJECT clone = Instantiate(tile_prefab, new Vector2(x * tile_size, y * tile_size), Quaternion.identity, this.transform);
 		clone.Initialize_TILE_OBJECT(tile_data[tile_data_id], x, y);
+	}
+
+	public void Get_Bounds_TILE_RENDERER(out float neg_x, out float neg_y, out float pos_x, out float pos_y)
+	{
+		neg_x = bounds_neg_x + transform.position.x;
+		neg_y = bounds_neg_y + transform.position.y;
+		pos_x = bounds_pos_x + transform.position.x;
+		pos_y = bounds_pos_y + transform.position.y;
+	}
+
+	public void Move_TILE_RENDERER(int axis)//axis begins with positive x, positive y, negative x, negative y
+	{
+		switch (axis)
+		{
+			case 0:
+				transform.position = new Vector2(transform.position.x + (world_dimensions.x + boundary_width) * tile_size, transform.position.y);
+				break;
+			case 1:
+				transform.position = new Vector2(transform.position.x, transform.position.y + (world_dimensions.y + boundary_width) * tile_size);
+				break;
+			case 2:
+				transform.position = new Vector2(transform.position.x - (world_dimensions.x + boundary_width) * tile_size, transform.position.y);
+				break;
+			case 3:
+				transform.position = new Vector2(transform.position.x, transform.position.y - (world_dimensions.y + boundary_width) * tile_size);
+				break;
+			default:break;
+		}
 	}
 }

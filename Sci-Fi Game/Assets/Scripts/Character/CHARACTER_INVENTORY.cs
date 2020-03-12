@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class CHARACTER_INVENTORY
+public class CHARACTER_INVENTORY : MonoBehaviour
 {
 	public List<ITEM_COUNT> item_array = new List<ITEM_COUNT>();
 

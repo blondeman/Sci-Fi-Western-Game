@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class CHARACTER_MOVE
+public class CHARACTER_MOVE : MonoBehaviour
 {
-	public Rigidbody2D		rigidbody;
+	public new Rigidbody2D	rigidbody;
 	public float			speed;
 
 	Vector2					direction;

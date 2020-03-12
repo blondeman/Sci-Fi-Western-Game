@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class CHARACTER_HEALTH
+public class CHARACTER_HEALTH : MonoBehaviour
 {
 	public float	max_health;
 	float			current_health;
