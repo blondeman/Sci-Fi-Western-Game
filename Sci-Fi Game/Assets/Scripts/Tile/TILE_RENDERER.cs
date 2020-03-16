@@ -49,29 +49,9 @@ public class TILE_RENDERER : MonoBehaviour
 
 	public void Get_Bounds_TILE_RENDERER(out float neg_x, out float neg_y, out float pos_x, out float pos_y)
 	{
-		neg_x = bounds_neg_x + transform.position.x;
-		neg_y = bounds_neg_y + transform.position.y;
-		pos_x = bounds_pos_x + transform.position.x;
-		pos_y = bounds_pos_y + transform.position.y;
-	}
-
-	public void Move_TILE_RENDERER(int axis)//axis begins with positive x, positive y, negative x, negative y
-	{
-		switch (axis)
-		{
-			case 0:
-				transform.position = new Vector2(transform.position.x + (world_dimensions.x + boundary_width) * tile_size, transform.position.y);
-				break;
-			case 1:
-				transform.position = new Vector2(transform.position.x, transform.position.y + (world_dimensions.y + boundary_width) * tile_size);
-				break;
-			case 2:
-				transform.position = new Vector2(transform.position.x - (world_dimensions.x + boundary_width) * tile_size, transform.position.y);
-				break;
-			case 3:
-				transform.position = new Vector2(transform.position.x, transform.position.y - (world_dimensions.y + boundary_width) * tile_size);
-				break;
-			default:break;
-		}
+		neg_x = bounds_neg_x;
+		neg_y = bounds_neg_y;
+		pos_x = bounds_pos_x;
+		pos_y = bounds_pos_y;
 	}
 }
