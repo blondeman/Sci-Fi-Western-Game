@@ -13,6 +13,11 @@ public class TILE_RENDERER : MonoBehaviour
 	public TILE_OBJECT				tile_prefab;
 	[HideInInspector] public float	bounds_neg_x, bounds_neg_y, bounds_pos_x, bounds_pos_y;
 
+	[Header("TESTING")]
+	public Vector2Int test_start, test_end;
+	private Vector2Int previous_test_start, previous_test_end;
+	private NODE path;
+
 	private void Start()
 	{
 		if (instance == null)
@@ -53,5 +58,38 @@ public class TILE_RENDERER : MonoBehaviour
 		neg_y = bounds_neg_y;
 		pos_x = bounds_pos_x;
 		pos_y = bounds_pos_y;
+	}
+
+	public bool Node_Valid_TILE_RENDERER(int x, int y)
+	{
+		return tile_array.Node_Valid_TILE_ARRAY(x, y);
+	}
+
+	public void OnDrawGizmos()
+	{
+		PATHFINDER pathfinder = new PATHFINDER();
+		NODE start = new NODE(test_start.x, test_start.y);
+		NODE end = new NODE(test_end.x, test_end.y);
+
+		if (test_end != previous_test_end || test_start != previous_test_start)
+		{
+			path = pathfinder.A_Star_PATHFINDER(start, end);
+			Debug.Log("qwe");
+		}
+
+		if (path == null)
+		{
+			Debug.Log("ASD");
+			path = new NODE();
+		}
+
+		Gizmos.color = Color.blue;
+		for(int i = path.distance; i >0; i--)
+		{
+			Gizmos.DrawLine(path.Get_Parent_NODE(i).Get_Position_NODE(), path.Get_Parent_NODE(i-1).Get_Position_NODE());
+		}
+
+		previous_test_end = test_end;
+		previous_test_start = test_start;
 	}
 }

@@ -19,4 +19,19 @@ public class TILE_ARRAY
 	{
 		int_array[x, y] = (int)tile_type;
 	}
+
+	public bool Node_Valid_TILE_ARRAY(int x, int y)
+	{
+		if (x >= width || x < 0 || y >= height || y < 0)
+			return false;
+
+		switch(int_array[x, y])
+		{
+			case (int)TILE_TYPE.solid:
+			case (int)TILE_TYPE.transparent:
+				return false;
+			default:
+				return true;
+		}
+	}
 }

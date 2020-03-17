@@ -244,6 +244,8 @@ MonoBehaviour:
   bounds_neg_y: 0
   bounds_pos_x: 0
   bounds_pos_y: 0
+  test_start: {x: -4, y: 21}
+  test_end: {x: 3, y: 0}
 --- !u!4 &930324450
 Transform:
   m_ObjectHideFlags: 0
