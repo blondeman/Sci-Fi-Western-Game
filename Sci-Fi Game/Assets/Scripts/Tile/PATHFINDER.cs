@@ -32,8 +32,8 @@ public class PATHFINDER
 			foreach(NODE child in current.Get_Surround_NODE())
 			{
 				//if (!TILE_RENDERER.instance.Node_Valid_TILE_RENDERER(child.x, child.y))
-					//continue;
-
+				//continue;
+				
 				if (Contains(closed_set.ToArray(), child)>=0)
 					continue;
 
@@ -90,6 +90,7 @@ public class NODE
 		h_score = 0;
 		g_score = 0;
 		f_score = 0;
+		distance = 0;
 	}
 
 	public NODE()
@@ -99,6 +100,7 @@ public class NODE
 		h_score = 0;
 		g_score = 0;
 		f_score = 0;
+		distance = 0;
 	}
 
 	public Vector2 Get_Position_NODE()
@@ -108,7 +110,7 @@ public class NODE
 
 	public NODE[] Get_Surround_NODE()
 	{
-		NODE[] array = new NODE[20];
+		NODE[] array = new NODE[8];
 		array[0] = new NODE(x + 1, y);
 		array[1] = new NODE(x + 1, y + 1);
 		array[2] = new NODE(x, y + 1);
@@ -117,7 +119,7 @@ public class NODE
 		array[5] = new NODE(x - 1, y - 1);
 		array[6] = new NODE(x, y - 1);
 		array[7] = new NODE(x + 1, y - 1);
-		array[8] = new NODE(x + 2, y + 1);
+		/*array[8] = new NODE(x + 2, y + 1);
 		array[9] = new NODE(x + 2, y);
 		array[10] = new NODE(x + 2, y - 1);
 		array[11] = new NODE(x - 1, y + 2);
@@ -128,7 +130,7 @@ public class NODE
 		array[16] = new NODE(x - 2, y - 1);
 		array[17] = new NODE(x - 1, y - 2);
 		array[18] = new NODE(x, y - 2);
-		array[19] = new NODE(x + 1, y - 2);
+		array[19] = new NODE(x + 1, y - 2);*/
 		return array;
 	}
 
