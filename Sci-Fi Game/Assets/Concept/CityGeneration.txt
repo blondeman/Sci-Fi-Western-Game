@@ -1,0 +1,8 @@
+a planets civilization will be randomly generated
+city generation will work in the following
+at the center, a crossroads will be created
+then roads will be created from each side and buildings from the side of those roads
+each city will have a size value for example 100
+every road created will decrement that by 1
+the chance for a building to be created will be the current value / original value
+this should lead to a city with dense buildings in the center, and more dispersed around the edges
