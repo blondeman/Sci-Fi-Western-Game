@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CHARACTER_INVENTORY : MonoBehaviour
 {
+	public int				max_size = 15;
 	public List<ITEM_COUNT> item_array = new List<ITEM_COUNT>();
 
 	public ITEM_DATA Get_Item_Data_CHARACTER_INVENTORY(int item_id)
@@ -30,10 +31,37 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 			}
 		}
 
+		if (item_array.Count >= max_size)
+			return;
+
 		if (!found)
-		{
-			item_array.Add(new ITEM_COUNT(id, amount));
+		{			
+			item_array.Add(new ITEM_COUNT(id, amount, Get_Lowest_Position_CHARACTER_INVENTORY()));
 		}
+	}
+
+	public int Get_Lowest_Position_CHARACTER_INVENTORY()
+	{
+		for(int i = 0;i<max_size;i++)
+		{
+			bool found = false;
+
+			for(int j = 0; j < item_array.Count; j++)
+			{
+				if (item_array[j].position == i)
+				{
+					found = true;
+					break;
+				}
+			}
+
+			if (!found)
+			{
+				return i;
+			}
+		}
+
+		return -1;
 	}
 
 	//RETURNS FALSE IF NOT ENOUGH OF THE ITEM OR DOES NOT HAVE THE ITEM
@@ -65,15 +93,6 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 			}
 		}
 		return false;
-	}
-
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.I))
-			Add_Item_CHARACTER_INVENTORY(ITEM_LIST.instance.items[0], 3);
-
-		if (Input.GetKeyDown(KeyCode.U))
-			Drop_Item_CHARACTER_INVENTORY(ITEM_LIST.instance.items[0], 10);
 	}
 
 	public void Drop_Item_CHARACTER_INVENTORY(ITEM_DATA item_data, int amount)

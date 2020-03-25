@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b6eb9ef909a1244925eee9b2443a54, type: 3}
   m_Name: item_2
   m_EditorClassIdentifier: 
-  ui_sprite: {fileID: 0}
-  equip_sprite: {fileID: 0}
+  ui_sprite: {fileID: 21300000, guid: 0e3497f23a72cf544842b60c16a62e85, type: 3}
+  equip_sprite: {fileID: 21300000, guid: 0e3497f23a72cf544842b60c16a62e85, type: 3}
   types: 
+  rarity: 0

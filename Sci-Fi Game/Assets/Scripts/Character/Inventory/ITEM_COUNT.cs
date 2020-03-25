@@ -5,14 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class ITEM_COUNT
 {
-	public int						id;
-	public int						count;
-	[HideInInspector] public int	pos_x;
-	[HideInInspector] public int	pos_y;
+	public int id;
+	public int count;
+	public int position;
 
-	public ITEM_COUNT(int id, int count)
+	public ITEM_COUNT(int id, int count, int position)
 	{
-		this.id =		id;
-		this.count =	count;
+		this.id			= id;
+		this.count		= count;
+		this.position	= position;
 	}
 }
