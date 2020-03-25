@@ -66,4 +66,21 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 		}
 		return false;
 	}
+
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.I))
+			Add_Item_CHARACTER_INVENTORY(ITEM_LIST.instance.items[0], 3);
+
+		if (Input.GetKeyDown(KeyCode.U))
+			Drop_Item_CHARACTER_INVENTORY(ITEM_LIST.instance.items[0], 10);
+	}
+
+	public void Drop_Item_CHARACTER_INVENTORY(ITEM_DATA item_data, int amount)
+	{
+		if(Remove_Item_CHARACTER_INVENTORY(item_data, amount))
+		{
+			ITEM_LIST.instance.Drop_Item_ITEM_LIST(item_data, amount, transform.position);
+		}
+	}
 }

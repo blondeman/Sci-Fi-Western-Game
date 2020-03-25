@@ -9,15 +9,13 @@ public class TILE_RENDERER : MonoBehaviour
 	public Vector2Int				world_dimensions;
 	public int						boundary_width;
 	private TILE_ARRAY				tile_array;
-	public TILE_DATA[]				tile_data;
-	public TILE_OBJECT				tile_prefab;
+	private TILE_DATA[]				tile_data;
 	[HideInInspector] public float	bounds_neg_x, bounds_neg_y, bounds_pos_x, bounds_pos_y;
 
 	private void Start()
 	{
 		if (instance == null)
 			instance = this;
-		Render_TILE_RENDERER();
 
 		float boundary_width_size = boundary_width * tile_size;
 
@@ -25,6 +23,16 @@ public class TILE_RENDERER : MonoBehaviour
 		bounds_neg_y = boundary_width_size/ 2 -+ tile_size / 2;
 		bounds_pos_x = (boundary_width + world_dimensions.x) * tile_size + boundary_width_size / 2 - tile_size / 2;
 		bounds_pos_y = (boundary_width + world_dimensions.y) * tile_size + boundary_width_size / 2 - tile_size / 2;
+
+		Object[] temp_object_array = Resources.LoadAll("tile_data", typeof(TILE_DATA));
+		tile_data = new TILE_DATA[temp_object_array.Length];
+
+		for (int i = 0; i < temp_object_array.Length; i++)
+		{
+			tile_data[i] = (TILE_DATA)temp_object_array[i];
+		}
+
+		Render_TILE_RENDERER();
 	}
 
 	public void Render_TILE_RENDERER()
@@ -43,7 +51,7 @@ public class TILE_RENDERER : MonoBehaviour
 
 	public void Create_Tile_TILE_RENDERER(int x, int y, int tile_data_id)
 	{
-		TILE_OBJECT clone = Instantiate(tile_prefab, new Vector2(x * tile_size, y * tile_size), Quaternion.identity, this.transform);
+		TILE_OBJECT clone = Instantiate(PREFABS.instance.tile, new Vector2(x * tile_size, y * tile_size), Quaternion.identity, this.transform).GetComponent<TILE_OBJECT>();
 		clone.Initialize_TILE_OBJECT(tile_data[tile_data_id], x, y);
 	}
 

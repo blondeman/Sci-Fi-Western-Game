@@ -45,37 +45,14 @@ public class CHARACTER_MOVE : MonoBehaviour
 
 		if (transform.position.y > pos_y)
 		{
-			print("Greater");
 			float offset = transform.position.y - pos_y;
 			transform.position = new Vector2(transform.position.x, neg_y + offset);
 		}
 
 		if (transform.position.y < neg_y)
 		{
-			print("lesser");
 			float offset = transform.position.y - neg_y;
 			transform.position = new Vector2(transform.position.x, pos_y + offset);
 		}
 	}
-
-	/*
-	public void Move_TILE_RENDERER(int axis)//axis begins with positive x, positive y, negative x, negative y
-	{
-		switch (axis)
-		{
-			case 0:
-				transform.position = new Vector2(transform.position.x + (world_dimensions.x + boundary_width) * tile_size, transform.position.y);
-				break;
-			case 1:
-				transform.position = new Vector2(transform.position.x, transform.position.y + (world_dimensions.y + boundary_width) * tile_size);
-				break;
-			case 2:
-				transform.position = new Vector2(transform.position.x - (world_dimensions.x + boundary_width) * tile_size, transform.position.y);
-				break;
-			case 3:
-				transform.position = new Vector2(transform.position.x, transform.position.y - (world_dimensions.y + boundary_width) * tile_size);
-				break;
-			default:break;
-		}
-	}*/
 }

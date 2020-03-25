@@ -6,6 +6,7 @@ public class ITEM_LIST : MonoBehaviour
 {
 	public static ITEM_LIST instance;
 	public ITEM_DATA[]		items;
+	public List<ITEM_OBJECT> item_objects = new List<ITEM_OBJECT>();
 
 	private void Start()
 	{
@@ -28,5 +29,12 @@ public class ITEM_LIST : MonoBehaviour
 			if (items[i].name == item_data.name) return i;
 		}
 		return -1;
+	}
+
+	public void Drop_Item_ITEM_LIST(ITEM_DATA item_data, int amount, Vector2 position)
+	{
+		ITEM_OBJECT clone = Instantiate(PREFABS.instance.item, position, Quaternion.identity).GetComponent<ITEM_OBJECT>();
+		clone.Initialize_ITEM_OBJECT(item_data, amount);
+		item_objects.Add(clone);
 	}
 }
