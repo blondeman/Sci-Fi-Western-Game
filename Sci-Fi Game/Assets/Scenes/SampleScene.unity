@@ -212,9 +212,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 930324450}
+  - component: {fileID: 930324452}
   - component: {fileID: 930324449}
   - component: {fileID: 930324451}
-  - component: {fileID: 930324452}
   m_Layer: 0
   m_Name: Global Scripts
   m_TagString: Untagged

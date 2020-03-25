@@ -8,11 +8,14 @@ public class ITEM_LIST : MonoBehaviour
 	public ITEM_DATA[]		items;
 	public List<ITEM_OBJECT> item_objects = new List<ITEM_OBJECT>();
 
-	private void Start()
+	private void Awake()
 	{
 		if (instance == null)
 			instance = this;
+	}
 
+	private void Start()
+	{
 		Object[] temp_object_array = Resources.LoadAll("item_data", typeof(ITEM_DATA));
 		items = new ITEM_DATA[temp_object_array.Length];
 

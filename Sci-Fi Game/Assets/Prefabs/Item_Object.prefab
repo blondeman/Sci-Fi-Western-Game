@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4707102547012942222}
   m_Layer: 0
   m_Name: Item_Object
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite_renderer: {fileID: 5924477172538033076}
+  pickup_countdown: 2
+  item_data: {fileID: 0}
+  count: 0
 --- !u!212 &5924477172538033076
 SpriteRenderer:
   m_ObjectHideFlags: 0

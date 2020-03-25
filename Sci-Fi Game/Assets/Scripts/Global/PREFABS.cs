@@ -8,7 +8,7 @@ public class PREFABS : MonoBehaviour
 	public GameObject		item;
 	public GameObject		tile;
 
-	private void Start()
+	private void Awake()
 	{
 		if (instance == null)
 			instance = this;

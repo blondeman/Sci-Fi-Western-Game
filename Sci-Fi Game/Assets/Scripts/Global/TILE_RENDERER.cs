@@ -12,11 +12,14 @@ public class TILE_RENDERER : MonoBehaviour
 	private TILE_DATA[]				tile_data;
 	[HideInInspector] public float	bounds_neg_x, bounds_neg_y, bounds_pos_x, bounds_pos_y;
 
-	private void Start()
+	private void Awake()
 	{
 		if (instance == null)
 			instance = this;
+	}
 
+	private void Start()
+	{
 		float boundary_width_size = boundary_width * tile_size;
 
 		bounds_neg_x = boundary_width_size/2 - tile_size/2;

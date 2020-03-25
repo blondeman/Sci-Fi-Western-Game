@@ -83,4 +83,14 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 			ITEM_LIST.instance.Drop_Item_ITEM_LIST(item_data, amount, transform.position);
 		}
 	}
+
+	public void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.transform.tag.Equals("Item"))
+		{
+			ITEM_OBJECT item = collision.GetComponent<ITEM_OBJECT>();
+			Add_Item_CHARACTER_INVENTORY(item.item_data, item.count);
+			Destroy(collision.gameObject);
+		}
+	}
 }
