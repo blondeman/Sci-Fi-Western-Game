@@ -6,6 +6,7 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 {
 	public int				max_size = 15;
 	public List<ITEM_COUNT> item_array = new List<ITEM_COUNT>();
+	public INVENTORY_UI		inventory_ui;
 
 	public ITEM_DATA Get_Item_Data_CHARACTER_INVENTORY(int item_id)
 	{
@@ -19,25 +20,22 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 	public void Add_Item_CHARACTER_INVENTORY(ITEM_DATA item_data, int amount)
 	{
 		int id = ITEM_LIST.instance.Get_ID_ITEM_LIST(item_data);
-		bool found = false;
 
 		for (int i = 0; i < item_array.Count; i++)
 		{
 			if (item_array[i].id == id)
 			{
 				item_array[i].count += amount;
-				found = true;
-				break;
+				Update_Inventory_CHARACTER_INVENTORY();
+				return;
 			}
 		}
 
 		if (item_array.Count >= max_size)
 			return;
 
-		if (!found)
-		{			
-			item_array.Add(new ITEM_COUNT(id, amount, Get_Lowest_Position_CHARACTER_INVENTORY()));
-		}
+		item_array.Add(new ITEM_COUNT(id, amount, Get_Lowest_Position_CHARACTER_INVENTORY()));
+		Update_Inventory_CHARACTER_INVENTORY();
 	}
 
 	public int Get_Lowest_Position_CHARACTER_INVENTORY()
@@ -89,6 +87,7 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 				{
 					return false;
 				}
+				Update_Inventory_CHARACTER_INVENTORY();
 				return true;
 			}
 		}
@@ -111,5 +110,22 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 			Add_Item_CHARACTER_INVENTORY(item.item_data, item.count);
 			Destroy(collision.gameObject);
 		}
+	}
+
+	public void Update_Inventory_CHARACTER_INVENTORY()
+	{
+		if (inventory_ui != null)
+		{
+			inventory_ui.Update_Items_INVENTORY_UI();
+		}
+	}
+
+	public void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.I))
+			Add_Item_CHARACTER_INVENTORY(Get_Item_Data_CHARACTER_INVENTORY(0));
+
+		if (Input.GetKeyDown(KeyCode.O))
+			Add_Item_CHARACTER_INVENTORY(Get_Item_Data_CHARACTER_INVENTORY(1));
 	}
 }
