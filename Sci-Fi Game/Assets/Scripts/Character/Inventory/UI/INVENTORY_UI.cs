@@ -37,6 +37,7 @@ public class INVENTORY_UI : MonoBehaviour
 
 		Clear_Menu_INVENTORY_UI();
 		Update_Slot_Count_INVENTORY_UI();
+		inventory.Update_Inventory_CHARACTER_INVENTORY();
 	}
 	
 	public void Update_Slot_Count_INVENTORY_UI()
@@ -109,7 +110,7 @@ public class INVENTORY_UI : MonoBehaviour
 		else
 		{
 			drop_view.SetActive(true);
-			ITEM_DATA item_data = inventory.Get_Item_Data_CHARACTER_INVENTORY(item_count.id);
+			ITEM_DATA item_data = inventory.Get_Item_Data_CHARACTER_INVENTORY(ITEM_LIST.instance.Get_ID_ITEM_LIST(item_count.name));
 
 			drop_name.text = item_data.name;
 		}
@@ -134,7 +135,7 @@ public class INVENTORY_UI : MonoBehaviour
 		else
 		{
 			description_view.SetActive(true);
-			ITEM_DATA item_data = inventory.Get_Item_Data_CHARACTER_INVENTORY(item_count.id);
+			ITEM_DATA item_data = inventory.Get_Item_Data_CHARACTER_INVENTORY(ITEM_LIST.instance.Get_ID_ITEM_LIST(item_count.name));
 
 			text_name.text = item_data.name;
 			text_description.text = item_data.description;

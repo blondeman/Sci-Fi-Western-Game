@@ -8,6 +8,28 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 	public List<ITEM_COUNT> item_array = new List<ITEM_COUNT>();
 	public INVENTORY_UI		inventory_ui;
 
+	private void Start()
+	{
+		Read_From_File_CHARACTER_INVENTORY();
+	}
+
+	public void Read_From_File_CHARACTER_INVENTORY()
+	{
+		Data temp = SAVE_INVENTORY.Read_From_File_SAVE_INVENTORY(0);
+		if (temp != null)
+		{
+			max_size = temp.Size;
+			item_array.Clear();
+			for (int i = 0; i < temp.Items.Length; i++)
+			{
+				Data.Item item = temp.Items[i];
+				item_array.Add(new ITEM_COUNT(item.Count, item.Position, item.Name));
+			}
+
+			Update_Inventory_CHARACTER_INVENTORY(false);
+		}
+	}
+
 	public ITEM_DATA Get_Item_Data_CHARACTER_INVENTORY(int item_id)
 	{
 		return ITEM_LIST.instance.items[item_id];
@@ -29,11 +51,9 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 	}
 	public void Add_Item_CHARACTER_INVENTORY(ITEM_DATA item_data, int amount)
 	{
-		int id = ITEM_LIST.instance.Get_ID_ITEM_LIST(item_data);
-
 		for (int i = 0; i < item_array.Count; i++)
 		{
-			if (item_array[i].id == id)
+			if (item_array[i].name == item_data.name)
 			{
 				item_array[i].count += amount;
 				Update_Inventory_CHARACTER_INVENTORY();
@@ -44,7 +64,7 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 		if (item_array.Count >= max_size)
 			return;
 
-		item_array.Add(new ITEM_COUNT(id, amount, Get_Lowest_Position_CHARACTER_INVENTORY()));
+		item_array.Add(new ITEM_COUNT(amount, Get_Lowest_Position_CHARACTER_INVENTORY(), item_data.name));
 		Update_Inventory_CHARACTER_INVENTORY();
 	}
 
@@ -99,11 +119,11 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 
 	public void Drop_Item_CHARACTER_INVENTORY(int position, int amount)
 	{
-		ITEM_DATA item_data = ITEM_LIST.instance.items[item_array[Get_Position_CHARACTER_INVENTORY(position)].id];
+		int id = ITEM_LIST.instance.Get_ID_ITEM_LIST(item_array[Get_Position_CHARACTER_INVENTORY(position)].name);
 
 		if (Remove_Item_CHARACTER_INVENTORY(position, amount))
 		{
-			ITEM_LIST.instance.Drop_Item_ITEM_LIST(item_data, amount, transform.position);
+			ITEM_LIST.instance.Drop_Item_ITEM_LIST(id, amount, transform.position);
 		}
 	}
 
@@ -119,7 +139,13 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 
 	public void Update_Inventory_CHARACTER_INVENTORY()
 	{
-		if (inventory_ui != null)
+		Update_Inventory_CHARACTER_INVENTORY(true);
+	}
+	public void Update_Inventory_CHARACTER_INVENTORY(bool update_ui)
+	{
+		SAVE_INVENTORY.Write_To_File_SAVE_INVENTORY(this, 0);
+
+		if (inventory_ui != null && update_ui == true)
 		{
 			inventory_ui.Update_Items_INVENTORY_UI();
 		}

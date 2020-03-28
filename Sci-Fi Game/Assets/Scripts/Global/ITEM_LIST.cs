@@ -27,17 +27,22 @@ public class ITEM_LIST : MonoBehaviour
 
 	public int Get_ID_ITEM_LIST(ITEM_DATA item_data)
 	{
-		for(int i = 0; i < items.Length; i++)
+		return Get_ID_ITEM_LIST(item_data.name);
+	}
+
+	public int Get_ID_ITEM_LIST(string name)
+	{
+		for (int i = 0; i < items.Length; i++)
 		{
-			if (items[i].name == item_data.name) return i;
+			if (items[i].name == name) return i;
 		}
 		return -1;
 	}
 
-	public void Drop_Item_ITEM_LIST(ITEM_DATA item_data, int amount, Vector2 position)
+	public void Drop_Item_ITEM_LIST(int id, int amount, Vector2 position)
 	{
 		ITEM_OBJECT clone = Instantiate(PREFABS.instance.item, position, Quaternion.identity).GetComponent<ITEM_OBJECT>();
-		clone.Initialize_ITEM_OBJECT(item_data, amount);
+		clone.Initialize_ITEM_OBJECT(items[id], amount);
 		item_objects.Add(clone);
 	}
 }

@@ -114,7 +114,7 @@ MonoBehaviour:
   m_MinSize: {x: 1121, y: 544}
   m_MaxSize: {x: 26016, y: 20044}
   vertical: 0
-  controlID: 119
+  controlID: 118
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_MinSize: {x: 844, y: 544}
   m_MaxSize: {x: 22014, y: 20044}
   vertical: 1
-  controlID: 120
+  controlID: 119
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_MinSize: {x: 844, y: 272}
   m_MaxSize: {x: 22014, y: 10022}
   vertical: 0
-  controlID: 121
+  controlID: 120
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -389,7 +389,8 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 0
     m_SearchArea: 1
-    m_Folders: []
+    m_Folders:
+    - Assets/Character_Data/Character0
   m_ViewMode: 0
   m_StartGridSize: 70
   m_LastFolders: []
@@ -402,7 +403,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 56}
     m_SelectedIDs: 462f0000
     m_LastClickedID: 12102
-    m_ExpandedIDs: 00000000c42c0000342d0000422d00004e2d0000102e00006a2e0000982e0000b82e0000fc2e0000082f0000202f0000342f00003a2f0000662f0000722f0000
+    m_ExpandedIDs: 00000000c62c0000362d0000442d0000502d0000122e00006c2e00009a2e0000ba2e0000fe2e00000a2f0000222f0000362f00003c2f0000682f0000742f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -427,10 +428,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 0}
+    scrollPos: {x: 0, y: 52}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000c42c0000342d0000422d00004e2d0000102e00006a2e0000982e0000b82e0000fc2e0000082f0000202f0000342f00003a2f0000662f0000722f0000
+    m_ExpandedIDs: ffffffff00000000c62c0000362d0000442d0000502d0000122e00006c2e00009a2e0000ba2e0000fe2e00000a2f0000222f0000362f00003c2f0000682f0000742f0000c0310000ba470000bc470000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -517,7 +518,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 882dffff9c4effffda54ffff2255ffff6afbffff0e30000020300000283000003c3000009e300000be300000
+      m_ExpandedIDs: 6afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -577,9 +578,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 99.13495, y: 156.36386, z: -138.85579}
+    m_Target: {x: 284.66776, y: 191.41241, z: -272.16336}
     speed: 2
-    m_Value: {x: 99.13495, y: 156.36386, z: -138.85579}
+    m_Value: {x: 287.14276, y: 198.39745, z: -269.95242}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -612,9 +613,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 238.68044
+    m_Target: 513.4647
     speed: 2
-    m_Value: 238.68044
+    m_Value: 491.35382
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -760,21 +761,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Character/Inventory/UI
+    - Assets/Resources/item_data
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Character/Inventory/UI
+  - Assets/Resources/item_data
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Dominik\Documents\GitHub\Sci-Fi-Western-Game\Sci-Fi
     Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 342f0000
-    m_LastClickedID: 12084
-    m_ExpandedIDs: 00000000c42c0000342d0000422d00004e2d0000102e00006a2e0000982e0000b82e0000fc2e0000082f0000202f0000342f00003a2f0000662f0000722f000000ca9a3b
+    scrollPos: {x: 0, y: 52}
+    m_SelectedIDs: ba2e0000
+    m_LastClickedID: 11962
+    m_ExpandedIDs: 00000000c62c0000362d0000442d0000502d0000122e00006c2e00009a2e0000ba2e0000fe2e00000a2f0000362f00003c2f0000682f0000742f0000bc47000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -802,7 +803,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c42c0000342d0000422d00004e2d0000102e00006a2e0000982e0000b82e0000fc2e0000082f0000202f0000342f00003a2f0000662f0000722f0000
+    m_ExpandedIDs: 00000000c62c0000362d0000442d0000502d0000122e00006c2e00009a2e0000ba2e0000fe2e00000a2f0000222f0000362f00003c2f0000682f0000742f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -829,7 +830,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: e62e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -899,7 +900,7 @@ MonoBehaviour:
   m_MinSize: {x: 275, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: Debug
+    m_Text: Inspector
     m_Image: {fileID: -6905738622615590433, guid: 0000000000000000d000000000000000,
       type: 0}
     m_Tooltip: 
