@@ -17,18 +17,26 @@ public class INVENTORY_UI : MonoBehaviour
 	bool is_hidden;
 
 	[Header("Description View")]
-	public Text text_name;
-	public Text text_description;
-	public Text text_stats;
-	int			current_slot;
+	public GameObject	description_view;
+	public Text			text_name;
+	public Text			text_description;
+	public Text			text_stats;
+
+	[Header("Drop View")]
+	public GameObject	drop_view;
+	public Text			drop_name;
+	public InputField	input_field;
+	int					drop_count;
+
+	int current_slot;
 
 	private void Start()
 	{
 		is_hidden = true;
 		rect_transform.anchoredPosition = new Vector2(hidden_position, rect_transform.anchoredPosition.y);
 
+		Clear_Menu_INVENTORY_UI();
 		Update_Slot_Count_INVENTORY_UI();
-		Clear_Description_INVENTORY_UI();
 	}
 	
 	public void Update_Slot_Count_INVENTORY_UI()
@@ -71,34 +79,61 @@ public class INVENTORY_UI : MonoBehaviour
 			active_items.Add(clone);
 		}
 
-		Set_Description_INVENTORY_UI(current_slot, false);
+		Description_Menu_INVENTORY_UI(current_slot);
 	}
 
-	public void Clear_Description_INVENTORY_UI()
+	public void Clear_Menu_INVENTORY_UI()
 	{
+		drop_count = 1;
 		current_slot = -1;
-		text_name.text = "";
-		text_description.text = "";
-		text_stats.text = "";
+		description_view.SetActive(false);
+		drop_view.SetActive(false);
 	}
 
-	public void Set_Description_INVENTORY_UI(int slot_id, bool can_disable)
+	public void Drop_Menu_INVENTORY_UI(int slot_id)
 	{
-		if (slot_id < 0 || (current_slot == slot_id && can_disable))
+		if (slot_id < 0)
 		{
-			Clear_Description_INVENTORY_UI();
+			Clear_Menu_INVENTORY_UI();
 			return;
 		}
 
+		Clear_Menu_INVENTORY_UI();
+		current_slot = slot_id;
+		ITEM_COUNT item_count = active_slots[slot_id].item_count;
+		
+		if (item_count == null)
+		{
+			Clear_Menu_INVENTORY_UI();
+		}
+		else
+		{
+			drop_view.SetActive(true);
+			ITEM_DATA item_data = inventory.Get_Item_Data_CHARACTER_INVENTORY(item_count.id);
+
+			drop_name.text = item_data.name;
+		}
+	}
+
+	public void Description_Menu_INVENTORY_UI(int slot_id)
+	{
+		if (slot_id < 0)
+		{
+			Clear_Menu_INVENTORY_UI();
+			return;
+		}
+
+		Clear_Menu_INVENTORY_UI();
 		current_slot = slot_id;
 		ITEM_COUNT item_count = active_slots[slot_id].item_count;
 
 		if (item_count == null)
 		{
-			Clear_Description_INVENTORY_UI();
+			Clear_Menu_INVENTORY_UI();
 		}
 		else
 		{
+			description_view.SetActive(true);
 			ITEM_DATA item_data = inventory.Get_Item_Data_CHARACTER_INVENTORY(item_count.id);
 
 			text_name.text = item_data.name;
@@ -146,5 +181,19 @@ public class INVENTORY_UI : MonoBehaviour
 		}
 
 		rect_transform.anchoredPosition = new Vector2(end, rect_transform.anchoredPosition.y);
+	}
+
+	public void Change_Drop_Value_INVENTORY_UI(int amount)
+	{
+		drop_count += amount;
+		if (drop_count <= 0)
+			drop_count = 1;
+		else if (drop_count > active_slots[current_slot].item_count.count)
+			drop_count = active_slots[current_slot].item_count.count;
+	}
+
+	public void Drop_Item_INVENTORY_UI()
+	{
+		inventory.Drop_Item_CHARACTER_INVENTORY(current_slot, drop_count);
 	}
 }

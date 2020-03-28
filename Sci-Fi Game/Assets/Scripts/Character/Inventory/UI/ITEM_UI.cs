@@ -9,7 +9,12 @@ public class ITEM_UI : MonoBehaviour
 	public int			slot_id;
 
 	public void Set_Description_ITEM_UI()
-	{		
-		inventory_ui.Set_Description_INVENTORY_UI(slot_id, true);
+	{
+		inventory_ui.Description_Menu_INVENTORY_UI(slot_id);
+	}
+
+	public void Drop_Menu_ITEM_UI()
+	{
+		inventory_ui.Drop_Menu_INVENTORY_UI(slot_id);
 	}
 }

@@ -13,6 +13,16 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 		return ITEM_LIST.instance.items[item_id];
 	}
 
+	public int Get_Position_CHARACTER_INVENTORY(int position)
+	{
+		for(int i = 0; i < item_array.Count; i++)
+		{
+			if (item_array[i].position == position)
+				return i;
+		}
+		return -1;
+	}
+
 	public void Add_Item_CHARACTER_INVENTORY(ITEM_DATA item_data)
 	{
 		Add_Item_CHARACTER_INVENTORY(item_data, 1);
@@ -63,40 +73,35 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 	}
 
 	//RETURNS FALSE IF NOT ENOUGH OF THE ITEM OR DOES NOT HAVE THE ITEM
-	public bool Remove_Item_CHARACTER_INVENTORY(ITEM_DATA item_data)
+	public bool Remove_Item_CHARACTER_INVENTORY(int position)
 	{
-		return Remove_Item_CHARACTER_INVENTORY(item_data, 1);
+		return Remove_Item_CHARACTER_INVENTORY(position, 1);
 	}
-	public bool Remove_Item_CHARACTER_INVENTORY(ITEM_DATA item_data, int amount)
+	public bool Remove_Item_CHARACTER_INVENTORY(int position, int amount)
 	{
-		int id = ITEM_LIST.instance.Get_ID_ITEM_LIST(item_data);
+		int id = Get_Position_CHARACTER_INVENTORY(position);
 
-		for (int i = 0; i < item_array.Count; i++)
+		if (item_array[id].count > amount)
 		{
-			if (item_array[i].id == id)
-			{
-				if (item_array[i].count > amount)
-				{
-					item_array[i].count -= amount;
-				}
-				else if(item_array[i].count == amount)
-				{
-					item_array.RemoveAt(i);
-				}
-				else
-				{
-					return false;
-				}
-				Update_Inventory_CHARACTER_INVENTORY();
-				return true;
-			}
+			item_array[id].count -= amount;
 		}
-		return false;
+		else if(item_array[id].count == amount)
+		{
+			item_array.RemoveAt(id);
+		}
+		else
+		{
+			return false;
+		}
+		Update_Inventory_CHARACTER_INVENTORY();
+		return true;
 	}
 
-	public void Drop_Item_CHARACTER_INVENTORY(ITEM_DATA item_data, int amount)
+	public void Drop_Item_CHARACTER_INVENTORY(int position, int amount)
 	{
-		if(Remove_Item_CHARACTER_INVENTORY(item_data, amount))
+		ITEM_DATA item_data = ITEM_LIST.instance.items[item_array[Get_Position_CHARACTER_INVENTORY(position)].id];
+
+		if (Remove_Item_CHARACTER_INVENTORY(position, amount))
 		{
 			ITEM_LIST.instance.Drop_Item_ITEM_LIST(item_data, amount, transform.position);
 		}
