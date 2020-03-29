@@ -1,4 +1,15 @@
 {
     "Size": 15,
-    "Items": []
+    "Items": [
+        {
+            "Name": "item_0",
+            "Position": 0,
+            "Count": 3
+        },
+        {
+            "Name": "item_2",
+            "Position": 1,
+            "Count": 3
+        }
+    ]
 }
