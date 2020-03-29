@@ -113,6 +113,9 @@ public class INVENTORY_UI : MonoBehaviour
 			ITEM_DATA item_data = inventory.Get_Item_Data_CHARACTER_INVENTORY(ITEM_LIST.instance.Get_ID_ITEM_LIST(item_count.name));
 
 			drop_name.text = item_data.name;
+
+			drop_count = item_count.count;
+			input_field.text = drop_count.ToString();
 		}
 	}
 
@@ -191,6 +194,14 @@ public class INVENTORY_UI : MonoBehaviour
 			drop_count = 1;
 		else if (drop_count > active_slots[current_slot].item_count.count)
 			drop_count = active_slots[current_slot].item_count.count;
+
+		input_field.text = drop_count.ToString();
+	}
+
+	public void Set_Drop_Value_INVENTORY_UI()
+	{
+		drop_count = int.Parse(input_field.text);
+		Change_Drop_Value_INVENTORY_UI(0);
 	}
 
 	public void Drop_Item_INVENTORY_UI()
