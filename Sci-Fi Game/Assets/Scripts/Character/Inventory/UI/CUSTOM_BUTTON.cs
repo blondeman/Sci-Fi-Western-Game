@@ -28,6 +28,11 @@ public class CUSTOM_BUTTON : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
 	public void OnPointerDown(PointerEventData eventData)
 	{
+		Lerp_Color_CUSTOM_BUTTON(pressed_color);
+	}
+
+	public void OnPointerUp(PointerEventData eventData)
+	{
 		if (eventData.button == PointerEventData.InputButton.Left)
 			Left_Click_CUSTOM_BUTTON();
 		else if (eventData.button == PointerEventData.InputButton.Middle)
@@ -35,11 +40,6 @@ public class CUSTOM_BUTTON : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 		else if (eventData.button == PointerEventData.InputButton.Right)
 			Right_Click_CUSTOM_BUTTON();
 
-		Lerp_Color_CUSTOM_BUTTON(pressed_color);
-	}
-
-	public void OnPointerUp(PointerEventData eventData)
-	{
 		Lerp_Color_CUSTOM_BUTTON(hover_color);
 	}
 

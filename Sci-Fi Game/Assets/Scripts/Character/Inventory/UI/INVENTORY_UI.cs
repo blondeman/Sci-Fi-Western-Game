@@ -11,6 +11,11 @@ public class INVENTORY_UI : MonoBehaviour
 	public List<ITEM_UI> active_slots = new List<ITEM_UI>();
 	public List<GameObject> active_items = new List<GameObject>();
 
+	[Header("Drag")]
+	public Transform drag_parent;
+	public ITEM_UI pointer_hover;
+
+	[Header("Tab")]
 	public float hidden_position = -100;
 	public float shown_position = 100;
 	public float transition_time = 1.5f;
@@ -39,6 +44,28 @@ public class INVENTORY_UI : MonoBehaviour
 		Update_Slot_Count_INVENTORY_UI();
 		inventory.Update_Inventory_CHARACTER_INVENTORY();
 	}
+
+	public void Set_Drag_INVENTORY_UI(ITEM_UI parent, Transform child)
+	{
+		if (pointer_hover == null)
+		{
+			child.SetParent(parent.transform);
+			child.position = parent.transform.position;
+		}
+		else
+		{
+			child.SetParent(pointer_hover.transform);
+			child.position = pointer_hover.transform.position;
+			pointer_hover.child_item = child;
+
+			parent.child_item = null;
+
+			int item_count_id = inventory.Get_Position_CHARACTER_INVENTORY(parent.slot_id);
+			inventory.item_array[item_count_id].position = pointer_hover.slot_id;
+
+			inventory.Update_Inventory_CHARACTER_INVENTORY();
+		}
+	}
 	
 	public void Update_Slot_Count_INVENTORY_UI()
 	{
@@ -55,6 +82,7 @@ public class INVENTORY_UI : MonoBehaviour
 			slot.item_count = null;
 			slot.inventory_ui = this;
 			slot.slot_id = i;
+			slot.drag_parent = drag_parent;
 			slot.transform.name = "slots (" + i + ")";
 		}
 	}
@@ -77,6 +105,7 @@ public class INVENTORY_UI : MonoBehaviour
 			ITEM_UI slot = active_slots[inventory.item_array[i].position];
 			GameObject clone = Instantiate(PREFABS.instance.ui_item, slot.transform);
 			slot.item_count = inventory.item_array[i];
+			slot.child_item = clone.transform;
 			active_items.Add(clone);
 		}
 
