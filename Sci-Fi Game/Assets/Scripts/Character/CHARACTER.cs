@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CHARACTER : MonoBehaviour
+public class CHARACTER : ENTITY
 {
 	public CHARACTER_MOVE		move;
 	public CHARACTER_HEALTH		health;

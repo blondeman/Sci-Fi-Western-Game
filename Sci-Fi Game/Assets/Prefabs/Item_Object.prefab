@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25fc1d04331610741a59704af128a70b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  static_object: 1
   sprite_renderer: {fileID: 5924477172538033076}
   pickup_countdown: 2
   item_data: {fileID: 0}

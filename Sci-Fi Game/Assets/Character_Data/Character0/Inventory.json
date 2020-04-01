@@ -2,14 +2,9 @@
     "Size": 15,
     "Items": [
         {
-            "Name": "item_0",
-            "Position": 6,
-            "Count": 18
-        },
-        {
             "Name": "item_2",
-            "Position": 14,
-            "Count": 1
+            "Position": 0,
+            "Count": 3
         }
     ]
 }
