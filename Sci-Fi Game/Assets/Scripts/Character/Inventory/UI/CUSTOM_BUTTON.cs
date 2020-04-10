@@ -14,7 +14,6 @@ public class CUSTOM_BUTTON : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 	float lerp_time = 0.1f;
 
 	Coroutine lerp_color;
-	bool hovering = false;
 
 	[Header("Events")]
 	public UnityEvent left_click;

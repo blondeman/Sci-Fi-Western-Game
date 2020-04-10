@@ -9,7 +9,7 @@ public class TILE_OBJECT : MonoBehaviour
 	[HideInInspector] public int		array_x;
 	[HideInInspector] public int		array_y;
 
-	public void Initialize_TILE_OBJECT(TILE_DATA tile_data, int array_x, int array_y)
+	public void Init_TILE_OBJECT(TILE_DATA tile_data, int array_x, int array_y)
 	{
 		this.tile_data =			tile_data;
 		this.array_x =				array_x;

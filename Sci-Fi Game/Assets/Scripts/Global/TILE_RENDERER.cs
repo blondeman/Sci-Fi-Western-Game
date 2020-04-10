@@ -4,70 +4,119 @@ using UnityEngine;
 
 public class TILE_RENDERER : MonoBehaviour
 {
-	public static TILE_RENDERER		instance;
-	public float					tile_size;
-	public Vector2Int				world_dimensions;
-	public int						boundary_width;
-	private TILE_ARRAY				tile_array;
-	private TILE_DATA[]				tile_data;
-	[HideInInspector] public float	bounds_neg_x, bounds_neg_y, bounds_pos_x, bounds_pos_y;
+	public static TILE_RENDERER				instance;
+	[HideInInspector] public TILE_DATA[]	tile_data;
+
+	public int world_size;//amount of chunks in the x and y dimentions
+	public int chunk_size;//amount of chunks in each chunk in the x and y dirmention
+
+	public Transform chunk_loader;
+	public int chunk_radius;
+	public List<TILE_CHUNK> active_chunks = new List<TILE_CHUNK>();
 
 	private void Awake()
 	{
 		if (instance == null)
 			instance = this;
+
+		Load_Tile_Data_TILE_RENDERER();
 	}
 
-	private void Start()
+	void Load_Tile_Data_TILE_RENDERER()
 	{
-		float boundary_width_size = boundary_width * tile_size;
-
-		bounds_neg_x = boundary_width_size/2 - tile_size/2;
-		bounds_neg_y = boundary_width_size/ 2 -+ tile_size / 2;
-		bounds_pos_x = (boundary_width + world_dimensions.x) * tile_size + boundary_width_size / 2 - tile_size / 2;
-		bounds_pos_y = (boundary_width + world_dimensions.y) * tile_size + boundary_width_size / 2 - tile_size / 2;
-
 		Object[] temp_object_array = Resources.LoadAll("tile_data", typeof(TILE_DATA));
 		tile_data = new TILE_DATA[temp_object_array.Length];
-
 		for (int i = 0; i < temp_object_array.Length; i++)
 		{
 			tile_data[i] = (TILE_DATA)temp_object_array[i];
 		}
-
-		Render_TILE_RENDERER();
 	}
 
-	public void Render_TILE_RENDERER()
+	public void Update()
 	{
-		tile_array = new TILE_ARRAY();
-		tile_array.Initialize_TILE_ARRAY(world_dimensions.x + boundary_width * 2, world_dimensions.y + boundary_width * 2);
+		Render_Chunks_TILE_RENDERER();
+	}
 
-		for(int i = 0; i < tile_array.width; i++)
+	public void Render_Chunks_TILE_RENDERER()
+	{
+		Vector2Int position = Current_Chunk_TILE_RENDERER(chunk_loader.position);
+		List<TILE_CHUNK> chunks_to_delete = new List<TILE_CHUNK>();
+		chunks_to_delete.AddRange(active_chunks);
+
+		for (int i = -chunk_radius; i <= chunk_radius; i++)
 		{
-			for(int j = 0; j < tile_array.height; j++)
+			for (int j = -chunk_radius; j <= chunk_radius; j++)
 			{
-				Create_Tile_TILE_RENDERER(i, j, 0);
+				TILE_CHUNK new_chunk = Chunk_Exists_TILE_RENDERER(position.x + i, position.y + j);
+				if (new_chunk != null)
+				{
+					chunks_to_delete.Remove(new_chunk);
+				}
+				else
+				{
+					int x = (position.x + i);
+					int y = (position.y + j);
+
+					TILE_CHUNK clone = Instantiate(PREFABS.instance.chunk, new Vector2(x * chunk_size, y * chunk_size), Quaternion.identity, transform);					
+					Vector2Int chunk_data = Chunk_Data_TILE_RENDERER(x, y);
+					clone.transform.name = (chunk_data.x + ", " + chunk_data.y);
+					clone.Init_TILE_CHUNK(x, y, chunk_data.x, chunk_data.y, chunk_size);
+					clone.Load_Chunk_TILE_CHUNK();
+					active_chunks.Add(clone);
+				}
 			}
+		}
+
+		int count = chunks_to_delete.Count;
+		for (int i = 0; i < count; i++)
+		{
+			TILE_CHUNK chunk = chunks_to_delete[0];
+			active_chunks.Remove(chunk);
+			chunks_to_delete.Remove(chunk);
+			chunk.Unload_Chunk_TILE_CHUNK();
+			Destroy(chunk.gameObject);
 		}
 	}
 
-	public void Create_Tile_TILE_RENDERER(int x, int y, int tile_data_id)
+	public TILE_CHUNK Chunk_Exists_TILE_RENDERER(int x, int y)
 	{
-		TILE_OBJECT clone = Instantiate(PREFABS.instance.tile, new Vector2(x * tile_size, y * tile_size), Quaternion.identity, this.transform).GetComponent<TILE_OBJECT>();
-		clone.Initialize_TILE_OBJECT(tile_data[tile_data_id], x, y);
+		foreach(TILE_CHUNK chunk in active_chunks)
+		{
+			if(chunk.chunk_x == x && chunk.chunk_y == y)
+			{
+				return chunk;
+			}
+		}
+		return null;
 	}
 
-	public void Get_Bounds_TILE_RENDERER(out float neg_x, out float neg_y, out float pos_x, out float pos_y)
+	public Vector2Int Current_Chunk_TILE_RENDERER(Vector2 position)
 	{
-		neg_x = bounds_neg_x;
-		neg_y = bounds_neg_y;
-		pos_x = bounds_pos_x;
-		pos_y = bounds_pos_y;
+		return new Vector2Int(Mathf.RoundToInt((position.x - (chunk_size / 2)) / chunk_size), Mathf.RoundToInt((position.y - (chunk_size / 2)) / chunk_size));
 	}
 
-	public bool Node_Valid_TILE_RENDERER(int x, int y)
+	public Vector2Int Chunk_Data_TILE_RENDERER(int x, int y)
 	{
-		return tile_array.Node_Valid_TILE_ARRAY(x, y);
+		int pos_x;
+		int pos_y;
+
+		if (x >= 0)
+			pos_x = x % world_size;
+		else
+		{
+			pos_x = world_size - (Mathf.Abs(x) % world_size);
+			if (pos_x == 8) pos_x = 0;
+		}
+
+		if (y >= 0)
+			pos_y = y % world_size;
+		else
+		{
+			pos_y = world_size - (Mathf.Abs(y) % world_size);
+			if (pos_y == 8) pos_y = 0;
+		}
+
+
+		return new Vector2Int(pos_x, pos_y);
 	}
 }
