@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TILE_CHUNK : MonoBehaviour
 {
+	public int world_id = 0;
 	public int chunk_x, chunk_y;
 	public int data_x, data_y;
 	public int[,] array;
@@ -20,7 +21,15 @@ public class TILE_CHUNK : MonoBehaviour
 
 	public void Load_Chunk_TILE_CHUNK()
 	{
-		for(int i = 0; i < array.GetLength(0); i++)
+		bool exists = SAVE_CHUNK.Read_From_File_SAVE_CHUNK(this);
+
+		if (!exists)
+		{
+			//Generate Chunk
+			//SAVE_CHUNK.Write_To_File_SAVE_CHUNK(this);
+		}
+
+		for (int i = 0; i < array.GetLength(0); i++)
 		{
 			for (int j = 0; j < array.GetLength(1); j++)
 			{
@@ -34,6 +43,6 @@ public class TILE_CHUNK : MonoBehaviour
 
 	public void Unload_Chunk_TILE_CHUNK()
 	{
-		//save chunk data
+		SAVE_CHUNK.Write_To_File_SAVE_CHUNK(this);
 	}
 }

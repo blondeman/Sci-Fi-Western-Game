@@ -1,0 +1,15 @@
+{
+  "Size" : 15,
+  "Items" : [
+    {
+      "Name" : "item_2",
+      "Position" : 0,
+      "Count" : 6
+    },
+    {
+      "Name" : "item_0",
+      "Position" : 10,
+      "Count" : 3
+    }
+  ]
+}

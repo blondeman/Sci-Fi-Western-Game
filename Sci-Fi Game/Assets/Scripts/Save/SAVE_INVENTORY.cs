@@ -2,24 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using SimpleJSON;
 
 public static class SAVE_INVENTORY
 {
-	public static void Write_To_File_SAVE_INVENTORY(CHARACTER_INVENTORY inventory, int character_id)
+	public static void Write_To_File_SAVE_INVENTORY(CHARACTER_INVENTORY data)
 	{
-		Data data = new Data();
-		data.Size = inventory.max_size;
-		data.Items = new Data.Item[inventory.item_array.Count];
-		for(int i = 0; i < inventory.item_array.Count; i++)
+		JSONArray array = new JSONArray();
+		for (int i = 0; i < data.item_array.Count; i++)
 		{
-			data.Items[i] = new Data.Item();
-			data.Items[i].Name		= inventory.item_array[i].name;
-			data.Items[i].Position	= inventory.item_array[i].position;
-			data.Items[i].Count		= inventory.item_array[i].count;
+			JSONObject item = new JSONObject();
+			item.Add("Name", data.item_array[i].name);
+			item.Add("Position", data.item_array[i].position);
+			item.Add("Count", data.item_array[i].count);
+			array.Add(item);
 		}
 
-		string path = Path.Combine(Application.dataPath, "Character_Data/Character" + character_id);
-		string json = JsonUtility.ToJson(data, true);
+		JSONObject node = new JSONObject();
+		node.Add("Size", data.max_size);
+		node.Add("Items", array);
+
+		string path = Path.Combine(Application.dataPath, "Save_Data/Character_Data/Character" + data.character_id);
 		
 		if (!Directory.Exists(path))
 		{
@@ -27,47 +30,43 @@ public static class SAVE_INVENTORY
 		}
 
 		path = path + "/Inventory.json";
-
-		//Debug.Log("Writing to " + path);
+		
+		string write = node.ToString(2);
 		if (File.Exists(path))
 		{
-			File.WriteAllText(path, json);
+			File.WriteAllText(path, write);
 		}
 		else
 		{
 			StreamWriter sr = File.CreateText(path);
-			sr.Write(json);
+			sr.Write(write);
 			sr.Close();
 		}
 	}
 
-	public static Data Read_From_File_SAVE_INVENTORY(int character_id)
+	public static bool Read_From_File_SAVE_INVENTORY(CHARACTER_INVENTORY data)
 	{
-		string path = Path.Combine(Application.dataPath, "Character_Data/Character" + character_id + "/Inventory.json");
+		string path = Path.Combine(Application.dataPath, "Save_Data/Character_Data/Character" + data.character_id + "/Inventory.json");
 
 		if (File.Exists(path))
 		{
-			//Debug.Log("Reading from " + path);
-			string json = File.ReadAllText(path);
-			Data data = JsonUtility.FromJson<Data>(json);
+			JSONObject node = (JSONObject)JSON.Parse(File.ReadAllText(path));
+			
+			data.max_size = node["Size"];
+			JSONArray array = node["Items"].AsArray;
+			
+			for(int i = 0; i < array.Count; i++)
+			{
+				JSONObject item = array[i].AsObject;
+				data.item_array.Add(new ITEM_COUNT(
+				item["Count"],
+				item["Position"],
+				item["Name"]
+				));
+			}
 
-			return data;
+			return true;
 		}
-
-		return null;
+		return false;
 	}
-}
-
-public class Data
-{
-	[System.Serializable]
-	public class Item
-	{
-		public string Name;
-		public int Position;
-		public int Count;
-	}
-
-	public int Size;
-	public Item[] Items;
 }
