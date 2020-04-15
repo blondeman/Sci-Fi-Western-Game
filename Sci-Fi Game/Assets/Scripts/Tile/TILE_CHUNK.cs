@@ -25,7 +25,7 @@ public class TILE_CHUNK : MonoBehaviour
 
 		if (!exists)
 		{
-			//Generate Chunk
+			//Generate Chunk Data
 			//SAVE_CHUNK.Write_To_File_SAVE_CHUNK(this);
 		}
 
