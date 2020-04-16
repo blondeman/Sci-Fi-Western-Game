@@ -4,21 +4,9 @@ using UnityEngine;
 
 public class CHARACTER_INVENTORY : MonoBehaviour
 {
-	public int				character_id = 0;
 	public int				max_size = 15;
 	public List<ITEM_COUNT> item_array = new List<ITEM_COUNT>();
 	public INVENTORY_UI		inventory_ui;
-
-	private void Start()
-	{
-		Read_From_File_CHARACTER_INVENTORY();
-	}
-
-	public void Read_From_File_CHARACTER_INVENTORY()
-	{
-		SAVE_INVENTORY.Read_From_File_SAVE_INVENTORY(this);
-		Update_Inventory_CHARACTER_INVENTORY(false);
-	}
 
 	public ITEM_DATA Get_Item_Data_CHARACTER_INVENTORY(int item_id)
 	{
@@ -133,8 +121,6 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 	}
 	public void Update_Inventory_CHARACTER_INVENTORY(bool update_ui)
 	{
-		SAVE_INVENTORY.Write_To_File_SAVE_INVENTORY(this);
-
 		if (inventory_ui != null && update_ui == true)
 		{
 			inventory_ui.Update_Items_INVENTORY_UI();

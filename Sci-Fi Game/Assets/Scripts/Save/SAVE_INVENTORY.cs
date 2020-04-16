@@ -6,8 +6,9 @@ using SimpleJSON;
 
 public static class SAVE_INVENTORY
 {
-	public static void Write_To_File_SAVE_INVENTORY(CHARACTER_INVENTORY data)
+	public static void Write_To_File_SAVE_INVENTORY(CHARACTER_INVENTORY data, int character_id)
 	{
+		JSONObject node = new JSONObject();
 		JSONArray array = new JSONArray();
 		for (int i = 0; i < data.item_array.Count; i++)
 		{
@@ -17,12 +18,10 @@ public static class SAVE_INVENTORY
 			item.Add("Count", data.item_array[i].count);
 			array.Add(item);
 		}
-
-		JSONObject node = new JSONObject();
 		node.Add("Size", data.max_size);
 		node.Add("Items", array);
 
-		string path = Path.Combine(Application.dataPath, "Save_Data/Character_Data/Character" + data.character_id);
+		string path = Path.Combine(Application.dataPath, "Save_Data/Character_Data/Character" + character_id);
 		
 		if (!Directory.Exists(path))
 		{
@@ -44,9 +43,9 @@ public static class SAVE_INVENTORY
 		}
 	}
 
-	public static bool Read_From_File_SAVE_INVENTORY(CHARACTER_INVENTORY data)
+	public static bool Read_From_File_SAVE_INVENTORY(CHARACTER_INVENTORY data, int character_id)
 	{
-		string path = Path.Combine(Application.dataPath, "Save_Data/Character_Data/Character" + data.character_id + "/Inventory.json");
+		string path = Path.Combine(Application.dataPath, "Save_Data/Character_Data/Character" + character_id + "/Inventory.json");
 
 		if (File.Exists(path))
 		{

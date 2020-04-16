@@ -119,4 +119,9 @@ public class TILE_RENDERER : MonoBehaviour
 
 		return new Vector2Int(pos_x, pos_y);
 	}
+
+	public float World_Size_TILE_RENDERER()
+	{
+		return world_size * chunk_size;
+	}
 }

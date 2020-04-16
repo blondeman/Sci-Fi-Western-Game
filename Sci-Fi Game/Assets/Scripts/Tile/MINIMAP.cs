@@ -27,19 +27,7 @@ public class MINIMAP : MonoBehaviour
 
 	Vector2 Get_Position_Ratio_MINIMAP()
 	{
-		float pos_x = target.position.x / (TILE_RENDERER.instance.world_size * TILE_RENDERER.instance.chunk_size);
-		float pos_y = target.position.y / (TILE_RENDERER.instance.world_size * TILE_RENDERER.instance.chunk_size);
-
-		if (pos_x > 1)
-			pos_x -= (int)(pos_x);
-		if (pos_x < 0) 
-			pos_x -= (int)(pos_x-1);
-
-		if (pos_y > 1)
-			pos_y -= (int)(pos_y);
-		if (pos_y < 0)
-			pos_y -= (int)(pos_y - 1);
-
-		return new Vector2(2 * (pos_x - .5f), 2 * (pos_y - .5f));
+		Vector2 pos = CHARACTER_MOVE.Get_World_Pos_CHARACTER_MOVE(target);
+		return new Vector2(2 * (pos.x - .5f), 2 * (pos.y - .5f));
 	}
 }
