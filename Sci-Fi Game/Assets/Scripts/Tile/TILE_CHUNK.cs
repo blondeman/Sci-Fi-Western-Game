@@ -19,14 +19,28 @@ public class TILE_CHUNK : MonoBehaviour
 		array = new int[array_size, array_size];
 	}
 
-	public void Load_Chunk_TILE_CHUNK()
+	public void Load_Chunk_TILE_CHUNK(PERLIN_NOISE noise)
 	{
 		bool exists = SAVE_CHUNK.Read_From_File_SAVE_CHUNK(this);
 
 		if (!exists)
 		{
-			//Generate Chunk Data
-			//SAVE_CHUNK.Write_To_File_SAVE_CHUNK(this);
+			for (int i = 0; i < array.GetLength(0); i++)
+			{
+				for (int j = 0; j < array.GetLength(1); j++)
+				{
+					float value = noise.Get_Noise_PERLIN_NOISE(new Vector2(i + data_x * array.GetLength(0), j + data_y * array.GetLength(1)));
+					value *= 256f;
+					if (value < 64)
+					{
+						array[i, j] = 1;
+					}
+					else
+					{
+						array[i, j] = 0;
+					}
+				}
+			}			
 		}
 
 		for (int i = 0; i < array.GetLength(0); i++)

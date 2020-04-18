@@ -14,11 +14,15 @@ public class TILE_RENDERER : MonoBehaviour
 	public int chunk_radius;
 	public List<TILE_CHUNK> active_chunks = new List<TILE_CHUNK>();
 
+	public int seed;
+	public PERLIN_NOISE noise;
+
 	private void Awake()
 	{
 		if (instance == null)
 			instance = this;
 
+		noise = new PERLIN_NOISE(seed);
 		Load_Tile_Data_TILE_RENDERER();
 	}
 
@@ -61,7 +65,7 @@ public class TILE_RENDERER : MonoBehaviour
 					Vector2Int chunk_data = Chunk_Data_TILE_RENDERER(x, y);
 					clone.transform.name = (chunk_data.x + ", " + chunk_data.y);
 					clone.Init_TILE_CHUNK(x, y, chunk_data.x, chunk_data.y, chunk_size);
-					clone.Load_Chunk_TILE_CHUNK();
+					clone.Load_Chunk_TILE_CHUNK(noise);
 					active_chunks.Add(clone);
 				}
 			}
