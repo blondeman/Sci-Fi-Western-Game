@@ -21,27 +21,28 @@ public class TILE_CHUNK : MonoBehaviour
 
 	public void Load_Chunk_TILE_CHUNK(PERLIN_NOISE noise)
 	{
-		bool exists = SAVE_CHUNK.Read_From_File_SAVE_CHUNK(this);
-
-		if (!exists)
+		//bool exists = SAVE_CHUNK.Read_From_File_SAVE_CHUNK(this);
+		//if (!exists)
+		//{
+		for (int i = 0; i < array.GetLength(0); i++)
 		{
-			for (int i = 0; i < array.GetLength(0); i++)
-			{
-				for (int j = 0; j < array.GetLength(1); j++)
+			for (int j = 0; j < array.GetLength(1); j++)
+			{//xOrg + x / noiseTex.width * scale;
+				float xCoord = (data_x * array.GetLength(0) + i) / TILE_RENDERER.instance.World_Size_TILE_RENDERER() * noise.size.x;
+				float yCoord = (data_y * array.GetLength(1) + j) / TILE_RENDERER.instance.World_Size_TILE_RENDERER() * noise.size.y;
+				float value = noise.Get_Fractal_PERLIN_NOISE(new Vector2(xCoord, yCoord), 5, .1f);
+				value *= 256f;
+				if (value < 128)
 				{
-					float value = noise.Get_Noise_PERLIN_NOISE(new Vector2(i + data_x * array.GetLength(0), j + data_y * array.GetLength(1)));
-					value *= 256f;
-					if (value < 64)
-					{
-						array[i, j] = 1;
-					}
-					else
-					{
-						array[i, j] = 0;
-					}
+					array[i, j] = 1;
 				}
-			}			
+				else
+				{
+					array[i, j] = 0;
+				}
+			}
 		}
+		//}
 
 		for (int i = 0; i < array.GetLength(0); i++)
 		{
@@ -57,6 +58,6 @@ public class TILE_CHUNK : MonoBehaviour
 
 	public void Unload_Chunk_TILE_CHUNK()
 	{
-		SAVE_CHUNK.Write_To_File_SAVE_CHUNK(this);
+		//SAVE_CHUNK.Write_To_File_SAVE_CHUNK(this);
 	}
 }

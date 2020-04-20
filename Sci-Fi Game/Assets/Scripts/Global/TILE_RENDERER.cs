@@ -16,13 +16,14 @@ public class TILE_RENDERER : MonoBehaviour
 
 	public int seed;
 	public PERLIN_NOISE noise;
+	public float size;
 
 	private void Awake()
 	{
 		if (instance == null)
 			instance = this;
 
-		noise = new PERLIN_NOISE(seed);
+		noise = new PERLIN_NOISE(seed, Vector2.one * size);
 		Load_Tile_Data_TILE_RENDERER();
 	}
 
