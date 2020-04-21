@@ -18,6 +18,8 @@ public class TILE_RENDERER : MonoBehaviour
 	public PERLIN_NOISE noise;
 	public float size;
 
+	int total_weight;
+
 	private void Awake()
 	{
 		if (instance == null)
@@ -34,6 +36,7 @@ public class TILE_RENDERER : MonoBehaviour
 		for (int i = 0; i < temp_object_array.Length; i++)
 		{
 			tile_data[i] = (TILE_DATA)temp_object_array[i];
+			total_weight += tile_data[i].weight;
 		}
 	}
 
@@ -128,5 +131,21 @@ public class TILE_RENDERER : MonoBehaviour
 	public float World_Size_TILE_RENDERER()
 	{
 		return world_size * chunk_size;
+	}
+
+	public int Get_Weight_TILE_RENDERER(float value)
+	{
+		value *= total_weight;
+		int current_weight = 0;
+		for(int i = 0; i < tile_data.Length; i++)
+		{
+			if(value > current_weight && value < current_weight + tile_data[i].weight)
+			{
+				return i;
+			}
+
+			current_weight += tile_data[i].weight;
+		}
+		return 0;
 	}
 }

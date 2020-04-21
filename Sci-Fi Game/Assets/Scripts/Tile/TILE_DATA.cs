@@ -6,6 +6,7 @@ using UnityEngine;
 public class TILE_DATA : ScriptableObject
 {
 	public Sprite		sprite;
+	public int			weight;
 	public TILE_TYPE[]	types;
 }
 
