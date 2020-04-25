@@ -35,8 +35,16 @@ public class TILE_RENDERER : MonoBehaviour
 		tile_data = new TILE_DATA[temp_object_array.Length];
 		for (int i = 0; i < temp_object_array.Length; i++)
 		{
-			tile_data[i] = (TILE_DATA)temp_object_array[i];
-			total_weight += tile_data[i].weight;
+			for (int j = 0; j < temp_object_array.Length; j++)
+			{
+				TILE_DATA tile = (TILE_DATA)temp_object_array[j];
+				if (tile.id == i)
+				{
+					tile_data[i] = tile;
+					total_weight += tile_data[i].weight;
+					break;
+				}
+			}
 		}
 	}
 

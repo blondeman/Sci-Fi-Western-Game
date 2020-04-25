@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33225d22c8d48194b9a61d379b865f25, type: 3}
   m_Name: Brick
   m_EditorClassIdentifier: 
-  sprite: {fileID: 4759866921483365049, guid: 505f2f3194504f44896fd7749b489c08, type: 3}
+  id: 0
+  sprite: {fileID: -3523603760028579285, guid: 505f2f3194504f44896fd7749b489c08, type: 3}
   weight: 3
   types: 

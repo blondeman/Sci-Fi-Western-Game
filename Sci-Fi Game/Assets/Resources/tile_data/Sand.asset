@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33225d22c8d48194b9a61d379b865f25, type: 3}
   m_Name: Sand
   m_EditorClassIdentifier: 
-  sprite: {fileID: 8697376015662529595, guid: 505f2f3194504f44896fd7749b489c08, type: 3}
+  id: 1
+  sprite: {fileID: 7583804384456860702, guid: 505f2f3194504f44896fd7749b489c08, type: 3}
   weight: 6
   types: 

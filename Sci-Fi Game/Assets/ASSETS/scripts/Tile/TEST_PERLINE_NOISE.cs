@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TEST : MonoBehaviour
+public class TEST_PERLIN_NOISE : MonoBehaviour
 {
 	// Width and height of the texture in pixels.
 	public int pixWidth;
