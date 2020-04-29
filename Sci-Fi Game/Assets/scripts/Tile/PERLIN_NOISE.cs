@@ -57,9 +57,7 @@ public class PERLIN_NOISE
 
 		/* Calculate final result */
 		float result = (1.0f - fade_t1) * p0p1 + fade_t1 * p2p3;
-		//float d = .5f;
-		if(cutoff != 0)
-			result = (result + cutoff) / (cutoff * 2);
+		result += cutoff;
 		return result;
 	}
 
@@ -73,18 +71,3 @@ public class PERLIN_NOISE
 		return value;
 	}
 }
-
-/*
-  float t0 = p.x - p0.x;
-  float fade_t0 = fade(t0); Used for interpolation in horizontal direction
-
-float t1 = p.y - p0.y;
-float fade_t1 = fade(t1); Used for interpolation in vertical direction.
-
-Calculate dot products and interpolate
-float p0p1 = (1.0 - fade_t0) * dot(g0, (p - p0)) + fade_t0 * dot(g1, (p - p1));  between upper two lattice points 
-float p2p3 = (1.0 - fade_t0) * dot(g2, (p - p2)) + fade_t0 * dot(g3, (p - p3)); between lower two lattice points 
-  
- Calculate final result
-  return (1.0 - fade_t1) * p0p1 + fade_t1* p2p3;
-*/

@@ -10,9 +10,12 @@ public class BUILDING_CREATOR : EditorWindow
 	int current_tile = 0;
 	Vector2 scroll_position;
 
-	int x = 0;
-	int y = 0;
+	int size_x = 0;
+	int size_y = 0;
 	int[,] array = new int[0,0];
+	float richness;
+	string building_name;
+	bool show_settings = false;
 
 	[MenuItem("Custom/Building Editor")]
 	public static void ShowWindow()
@@ -47,29 +50,41 @@ public class BUILDING_CREATOR : EditorWindow
 		{
 			EditorGUILayout.BeginVertical();
 			{
-				GUILayout.Label("Array Settings", EditorStyles.boldLabel);
+				//GUILayout.Label("Building Settings", EditorStyles.boldLabel);
 				///ARRAY SETTINGS
-				EditorGUILayout.BeginHorizontal(EditorStyles.helpBox);
+				show_settings = EditorGUILayout.BeginFoldoutHeaderGroup(show_settings, "Building Settings");
+				EditorGUILayout.BeginVertical(EditorStyles.helpBox);
 				{
-					GUILayout.Label("Width : ");
-					x = EditorGUILayout.DelayedIntField(x, GUILayout.Width(50));
-					GUILayout.Label("Height : ");
-					y = EditorGUILayout.DelayedIntField(y, GUILayout.Width(50));
-
-					int[,] new_array = new int[x, y];
-					for (int i = 0; i < array.GetLength(0); i++)
+					EditorGUILayout.BeginHorizontal();
 					{
-						for (int j = 0; j < array.GetLength(1); j++)
-						{
-							if (i < x && j < y)
-								new_array[i, j] = array[i, j];
-						}
-					}
-					array = new_array;
-					GUILayout.FlexibleSpace();
-				}
-				GUILayout.EndHorizontal();
+						GUILayout.Label("Width : ");
+						size_x = EditorGUILayout.DelayedIntField(size_x, GUILayout.Width(50));
+						GUILayout.Label("Height : ");
+						size_y = EditorGUILayout.DelayedIntField(size_y, GUILayout.Width(50));
 
+						int[,] new_array = new int[size_x, size_y];
+						for (int i = 0; i < array.GetLength(0); i++)
+						{
+							for (int j = 0; j < array.GetLength(1); j++)
+							{
+								if (i < size_x && j < size_y)
+									new_array[i, j] = array[i, j];
+							}
+						}
+						array = new_array;
+						GUILayout.FlexibleSpace();
+					}
+					EditorGUILayout.EndHorizontal();
+
+					if (show_settings)
+					{
+						EditorGUILayout.LabelField("ID", Get_ID().ToString());
+						building_name = EditorGUILayout.TextField("Name", building_name);
+						richness = EditorGUILayout.Slider("Richness",richness, 0f, 1f);
+					}
+				}
+				EditorGUILayout.EndVertical();
+				EditorGUILayout.EndFoldoutHeaderGroup();
 				///FIELD
 				EditorGUILayout.BeginVertical(EditorStyles.helpBox, GUILayout.ExpandHeight(true), GUILayout.ExpandWidth(true));
 				{
@@ -88,8 +103,8 @@ public class BUILDING_CREATOR : EditorWindow
 							{
 								image = new Texture2D(48, 48);
 							}
-
-							if (GUILayout.RepeatButton(image, GUIStyle.none))
+							
+							if (GUILayout.Button(image, GUIStyle.none))
 							{
 								switch (tool)
 								{
@@ -159,7 +174,16 @@ public class BUILDING_CREATOR : EditorWindow
 
 	void Save()
 	{
+		BUILDING_DATA asset = CreateInstance<BUILDING_DATA>();
+		asset.id = Get_ID();
+		asset.data_array = array;
+		asset.name = building_name;
+		asset.richness = richness;
 
+		AssetDatabase.CreateAsset(asset, "Assets/Resources/building_data/" + building_name + ".asset");
+		AssetDatabase.SaveAssets();
+		EditorUtility.FocusProjectWindow();
+		Selection.activeObject = asset;
 	}
 
 	void Load()
@@ -169,7 +193,17 @@ public class BUILDING_CREATOR : EditorWindow
 
 	void New()
 	{
+		array = new int[size_x, size_y];
+		for(int i = 0; i < size_x; i++)
+		{
+			for (int j = 0; j < size_x; j++)
+			{
+				array[i, j] = -1;
+			}
+		}
 
+		richness = 0f;
+		building_name = "new_building";
 	}
 
 	void Zoom_In()
@@ -195,5 +229,32 @@ public class BUILDING_CREATOR : EditorWindow
 	void Draw()
 	{
 		tool = 2;
+	}
+
+	int Get_ID()
+	{
+		BUILDING_DATA[] building_data = UTILITY.FindAssetsByType<BUILDING_DATA>().ToArray();
+		int previous = 0;
+
+		for (int i = 0; i < building_data.Length; i++)
+		{
+			bool found = false;
+			for (int j = 0; j < building_data.Length; j++)
+			{
+				if (building_data[j].id == previous + 1)
+				{
+					found = true;
+					previous = building_data[j].id;
+					break;
+				}
+			}
+
+			if (!found)
+			{
+				previous++;
+				break;
+			}
+		}
+		return previous;
 	}
 }

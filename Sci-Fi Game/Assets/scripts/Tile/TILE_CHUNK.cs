@@ -30,7 +30,7 @@ public class TILE_CHUNK : MonoBehaviour
 			{//xOrg + x / noiseTex.width * scale;
 				float xCoord = (data_x * array.GetLength(0) + i) / TILE_RENDERER.instance.World_Size_TILE_RENDERER() * noise.size.x;
 				float yCoord = (data_y * array.GetLength(1) + j) / TILE_RENDERER.instance.World_Size_TILE_RENDERER() * noise.size.y;
-				float value = noise.Get_Fractal_PERLIN_NOISE(new Vector2(xCoord, yCoord), 5, .1f);
+				float value = noise.Get_Fractal_PERLIN_NOISE(new Vector2(xCoord, yCoord), 5, .2f);
 				array[i, j] = TILE_RENDERER.instance.Get_Weight_TILE_RENDERER(value);
 			}
 		}

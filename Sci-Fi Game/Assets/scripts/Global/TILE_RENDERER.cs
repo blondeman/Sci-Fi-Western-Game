@@ -143,7 +143,7 @@ public class TILE_RENDERER : MonoBehaviour
 
 	public int Get_Weight_TILE_RENDERER(float value)
 	{
-		value *= total_weight;
+		value *= total_weight*1.5f;
 		int current_weight = 0;
 		for(int i = 0; i < tile_data.Length; i++)
 		{

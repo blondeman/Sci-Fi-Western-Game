@@ -27,6 +27,7 @@ public class TEST_PERLIN_NOISE : MonoBehaviour
 	public bool auto_update = false;
 
 	public float cutoff;
+	public float multiplier = 2f;
 
 	void Start()
 	{
@@ -55,7 +56,7 @@ public class TEST_PERLIN_NOISE : MonoBehaviour
 				float yCoord = yOrg + y / noiseTex.height * scale;
 				//float sample = noise.Get_Noise_PERLIN_NOISE(new Vector2(xCoord, yCoord), cutoff);
 				float sample = noise.Get_Fractal_PERLIN_NOISE(new Vector2(xCoord, yCoord), fractal, cutoff);
-				pix[(int)y * noiseTex.width + (int)x] = new Color(sample*256, 0, 0);
+				pix[(int)y * noiseTex.width + (int)x] = new Color(sample* multiplier, sample * multiplier, sample * multiplier);
 				x++;
 			}
 			y++;
