@@ -40,7 +40,8 @@ public class TILE_CHUNK : MonoBehaviour
 		{
 			for (int j = 0; j < array.GetLength(1); j++)
 			{
-				TILE_OBJECT clone = Instantiate(PREFABS.instance.tile, new Vector2(chunk_x * array.GetLength(0) + i, chunk_y * array.GetLength(1) + j), Quaternion.identity, transform);
+				TILE_OBJECT clone = Instantiate(PREFABS.instance.tile, new Vector3(chunk_x * array.GetLength(0) + i, 0, chunk_y * array.GetLength(1) + j), 
+				Quaternion.Euler(90,0,0), transform);
 				clone.transform.name = (i + ", " + j);
 				clone.Init_TILE_OBJECT(TILE_RENDERER.instance.tile_data[array[i, j]], i, j);
 				tiles.Add(clone);

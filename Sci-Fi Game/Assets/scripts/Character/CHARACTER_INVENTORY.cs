@@ -105,7 +105,7 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 		}
 	}
 
-	public void OnTriggerEnter2D(Collider2D collision)
+	public void OnTriggerEnter(Collider collision)
 	{
 		if (collision.transform.tag.Equals("Item"))
 		{

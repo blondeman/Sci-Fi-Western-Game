@@ -45,7 +45,7 @@ public static class SAVE_CHARACTER
 			JSONObject node = (JSONObject)JSON.Parse(File.ReadAllText(path));
 
 			Vector2 pos = new Vector2(node["X"] * TILE_RENDERER.instance.World_Size_TILE_RENDERER(), node["Y"] * TILE_RENDERER.instance.World_Size_TILE_RENDERER());
-			move_data.transform.position = pos;
+			move_data.transform.position = new Vector3(pos.x, 1, pos.y);
 			health_data.current_health = node["Current_Health"]; 
 			health_data.max_health = node["Max_Health"];
 

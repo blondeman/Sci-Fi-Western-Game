@@ -73,7 +73,7 @@ public class TILE_RENDERER : MonoBehaviour
 					int x = (position.x + i);
 					int y = (position.y + j);
 
-					TILE_CHUNK clone = Instantiate(PREFABS.instance.chunk, new Vector2(x * chunk_size, y * chunk_size), Quaternion.identity, transform);					
+					TILE_CHUNK clone = Instantiate(PREFABS.instance.chunk, new Vector3(x * chunk_size, 0, y * chunk_size), Quaternion.identity, transform);					
 					Vector2Int chunk_data = Chunk_Data_TILE_RENDERER(x, y);
 					clone.transform.name = (chunk_data.x + ", " + chunk_data.y);
 					clone.Init_TILE_CHUNK(x, y, chunk_data.x, chunk_data.y, chunk_size);
@@ -106,9 +106,9 @@ public class TILE_RENDERER : MonoBehaviour
 		return null;
 	}
 
-	public Vector2Int Current_Chunk_TILE_RENDERER(Vector2 position)
+	public Vector2Int Current_Chunk_TILE_RENDERER(Vector3 position)
 	{
-		return new Vector2Int(Mathf.RoundToInt((position.x - (chunk_size / 2)) / chunk_size), Mathf.RoundToInt((position.y - (chunk_size / 2)) / chunk_size));
+		return new Vector2Int(Mathf.RoundToInt((position.x - (chunk_size / 2)) / chunk_size), Mathf.RoundToInt((position.z - (chunk_size / 2)) / chunk_size));
 	}
 
 	public Vector2Int Chunk_Data_TILE_RENDERER(int x, int y)

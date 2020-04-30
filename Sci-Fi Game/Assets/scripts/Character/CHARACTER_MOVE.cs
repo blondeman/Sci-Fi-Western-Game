@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class CHARACTER_MOVE : MonoBehaviour
 {
-	public new Rigidbody2D	rigidbody;
+	public new Rigidbody	rigidbody;
 	public float			speed;
 
-	Vector2					direction;
+	Vector3					direction;
 
 	public void Set_Direction_ABSTRACT_CHARACTER(Vector2 direction)
 	{
-		this.direction = direction;
+		this.direction = new Vector3(direction.x, 0, direction.y);
 	}
 
 	public void FixedUpdate()
@@ -22,7 +22,7 @@ public class CHARACTER_MOVE : MonoBehaviour
 	public static Vector2 Get_World_Pos_CHARACTER_MOVE(Transform transform)
 	{
 		float pos_x = transform.position.x / TILE_RENDERER.instance.World_Size_TILE_RENDERER();
-		float pos_y = transform.position.y / TILE_RENDERER.instance.World_Size_TILE_RENDERER();
+		float pos_y = transform.position.z / TILE_RENDERER.instance.World_Size_TILE_RENDERER();
 
 		if (pos_x > 1)
 			pos_x -= (int)(pos_x);

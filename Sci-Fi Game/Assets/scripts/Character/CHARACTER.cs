@@ -24,7 +24,7 @@ public class CHARACTER : ENTITY
 	{
 		SAVE_CHARACTER.Read_From_File_SAVE_CHARACTER(health, move, character_id);
 		SAVE_INVENTORY.Read_From_File_SAVE_INVENTORY(inventory, character_id);
-		inventory.Update_Inventory_CHARACTER_INVENTORY(false);
+		inventory.Update_Inventory_CHARACTER_INVENTORY();
 	}
 
 	public void Update()
