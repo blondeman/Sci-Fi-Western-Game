@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class INVENTORY_UI : MonoBehaviour
 {
-	public RectTransform rect_transform;
+	[HideInInspector] public RectTransform rect_transform;
 	public CHARACTER_INVENTORY inventory;
 	public GameObject content;
-	public List<ITEM_UI> active_slots = new List<ITEM_UI>();
-	public List<GameObject> active_items = new List<GameObject>();
+	[HideInInspector] public List<ITEM_UI> active_slots = new List<ITEM_UI>();
+	[HideInInspector] public List<GameObject> active_items = new List<GameObject>();
 
 	[Header("Drag")]
 	public Transform drag_parent;
-	public ITEM_UI pointer_hover;
+	[HideInInspector] public ITEM_UI pointer_hover;
 
 	[Header("Tab")]
 	public float hidden_position = -100;
@@ -37,6 +37,9 @@ public class INVENTORY_UI : MonoBehaviour
 
 	private void Start()
 	{
+		inventory.Set_UI_CHARACTER_INVENTORY(this);
+		rect_transform = GetComponent<RectTransform>();
+
 		is_hidden = true;
 		rect_transform.anchoredPosition = new Vector2(hidden_position, rect_transform.anchoredPosition.y);
 
