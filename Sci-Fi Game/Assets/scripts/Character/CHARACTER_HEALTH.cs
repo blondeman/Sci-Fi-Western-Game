@@ -7,7 +7,7 @@ public class CHARACTER_HEALTH : MonoBehaviour
 	public float max_health;
 	public float current_health;
 
-	private void Start()
+	public void Init()
 	{
 		current_health = max_health;
 	}

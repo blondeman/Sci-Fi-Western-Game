@@ -8,6 +8,11 @@ public class CHARACTER_INVENTORY : MonoBehaviour
 	public List<ITEM_COUNT> item_array = new List<ITEM_COUNT>();
 	[HideInInspector] public INVENTORY_UI		inventory_ui;
 
+	public void Init()
+	{
+
+	}
+
 	public void Set_UI_CHARACTER_INVENTORY(INVENTORY_UI ui)
 	{
 		inventory_ui = ui;

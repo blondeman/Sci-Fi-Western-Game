@@ -12,6 +12,10 @@ public class CHARACTER : ENTITY
 	private void Start()
 	{
 		//Load_Character_CHARACTER();
+
+		move.Init();
+		health.Init();
+		inventory.Init();
 	}
 
 	public void Save_Character_CHARACTER()

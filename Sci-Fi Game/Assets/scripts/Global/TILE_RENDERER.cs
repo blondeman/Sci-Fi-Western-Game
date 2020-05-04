@@ -33,9 +33,9 @@ public class TILE_RENDERER : MonoBehaviour
 	{
 		Object[] temp_object_array = Resources.LoadAll("tile_data", typeof(TILE_DATA));
 		tile_data = new TILE_DATA[temp_object_array.Length];
-		for (int i = 0; i < temp_object_array.Length; i++)
+		for (int i = 0; i < tile_data.Length; i++)
 		{
-			for (int j = 0; j < temp_object_array.Length; j++)
+			for (int j = 0; j < tile_data.Length; j++)
 			{
 				TILE_DATA tile = (TILE_DATA)temp_object_array[j];
 				if (tile.id == i)
