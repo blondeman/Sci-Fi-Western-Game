@@ -8,6 +8,7 @@ public class CHARACTER_MOVE : MonoBehaviour
 	public Transform		graphics;
 	public float			walk_speed;
 	public float			run_speed;
+	public float			acceleration;
 	float					speed;
 
 	public float			rotation_speed;
@@ -33,7 +34,7 @@ public class CHARACTER_MOVE : MonoBehaviour
 
 	public void FixedUpdate()
 	{
-		rigidbody.velocity = direction.normalized * speed;
+		rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, direction.normalized * speed, Time.deltaTime * acceleration);
 	}
 
 	public void Run_CHARACTER_MOVE(bool running)

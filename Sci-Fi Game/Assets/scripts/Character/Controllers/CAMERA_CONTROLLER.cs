@@ -27,6 +27,7 @@ public class CAMERA_CONTROLLER : MonoBehaviour
 	{
 		camera = GetComponent<Camera>();
 		offset = transform.position - target.position;
+		zoom = camera.orthographicSize;
 	}
 
 	public void Update()
@@ -44,6 +45,6 @@ public class CAMERA_CONTROLLER : MonoBehaviour
 	{
 		camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, zoom, Time.deltaTime*smooth);
 		transform.position = Vector3.Lerp(transform.position, target.position + offset + new Vector3(0,0, position), Time.deltaTime * smooth);
-		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(rotation, 0, 0), Time.deltaTime * smooth * 2);
+		transform.rotation = Quaternion.Euler(rotation, 0, 0);
 	}
 }
